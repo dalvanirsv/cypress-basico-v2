@@ -1,5 +1,4 @@
 
-
 describe('central de Atendimento ao Cliente TAT', function(){
     beforeEach(function() {
         cy.visit('./src/index.html')
@@ -15,7 +14,7 @@ describe('central de Atendimento ao Cliente TAT', function(){
         cy.get('#lastName').type('vieira')
         cy.get('#email').type('dalvanir@dalvanir.com')
         cy.get('#open-text-area').type(longTest, { delay: 0})
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.success').should('be.visible')
 
     })
@@ -25,7 +24,7 @@ describe('central de Atendimento ao Cliente TAT', function(){
         cy.get('#lastName').type('vieira')
         cy.get('#email').type('dalvanir@dalvanir')
         cy.get('#open-text-area').type('test')
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     })
 
@@ -41,11 +40,11 @@ describe('central de Atendimento ao Cliente TAT', function(){
         cy.get('#email').type('dalvanir@dalvanir.com')
         cy.get('#phone-checkbox').click()
         cy.get('#open-text-area').type('test')
-        cy.get('button[type="submit"]').click()
+        cy.contains('button', 'Enviar').click()
         cy.get('.error').should('be.visible')
     })
 
-    it.only('preencha e limpa os campos nome, sobrenome, email e telefone', function() {
+    it('preencha e limpa os campos nome, sobrenome, email e telefone', function() {
         cy.get('#firstName')
         .type('dalvanir')
         .should('have.value', 'dalvanir')
@@ -68,4 +67,17 @@ describe('central de Atendimento ao Cliente TAT', function(){
         .should('have.value', '')
 
     })
+
+    it('validar mensagem de erro ao não digitar os campos obrigatórios', function() {
+        cy.get('button[type="submit"]').click()
+
+        cy.get('.error').should('be.visible')
+
+    })   
+
+    it('envia um formulário com sucesso usando um comando customizado', function() {
+        cy.fillMandatoryFieldsAndSubmit()
+
+        cy.get('.success').should('be.visible')
+    })   
 })
