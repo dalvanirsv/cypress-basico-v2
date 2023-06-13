@@ -114,7 +114,7 @@ describe('central de Atendimento ao Cliente TAT', function(){
             cy.wrap($radio).should('be.checked')
         })
     })
-        it.only('Marca ambos os checkbox, e depois desmarca o último ', function() {
+        it('Marca ambos os checkbox, e depois desmarca o último ', function() {
            cy.get('input[type="checkbox"]')
            .check()
            .last()
@@ -122,4 +122,9 @@ describe('central de Atendimento ao Cliente TAT', function(){
            .should('not.be.checked')
             
     }) 
+
+    it.only('Seleciona um arquivo da pasta fixtures', function() {
+       cy.get('input[type="file"]#file-upload')
+         
+ }) 
 })
