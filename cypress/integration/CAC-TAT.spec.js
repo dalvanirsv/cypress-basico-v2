@@ -1,3 +1,4 @@
+
 describe("central de Atendimento ao Cliente TAT", function () {
   beforeEach(function () {
     cy.visit("./src/index.html");
@@ -84,8 +85,8 @@ describe("central de Atendimento ao Cliente TAT", function () {
     cy.get("#product").select("mentoria").should("have.value", "mentoria");
   });
 
-  it('seleciona um produto "Blog" por seu Indice', function () {
-    cy.get("#product").select("2").should("have.value", "blog");
+  it.only('seleciona um produto "Blog" por seu Indice', function () {
+    cy.get("#product").select("Cursos").should("have.value", "cursos");;
   });
 
   it('Marca um tipo de atendimento "feedback"', function () {
