@@ -85,7 +85,7 @@ describe("central de Atendimento ao Cliente TAT", function () {
   });
 
   it('seleciona um produto "Blog" por seu Indice', function () {
-    cy.get("#product").select("1").should("have.value", "blog");
+    cy.get("#product").select("2").should("have.value", "blog");
   });
 
   it('Marca um tipo de atendimento "feedback"', function () {
