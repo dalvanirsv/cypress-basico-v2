@@ -7,15 +7,18 @@ describe("central de Atendimento ao Cliente TAT", function () {
     cy.title().should("be.equal", "Central de Atendimento ao Cliente TAT");
   });
 
-  it("preencha os campos obrigatórios e envia o formulário", function () {
+  it.only("preencha os campos obrigatórios e envia o formulário", function () {
     const longTest =
       "teste, teste, teste, teste, teste, teste,teste, teste, teste,teste, teste, teste,teste, teste, teste";
+    cy.clock();
     cy.get("#firstName").type("dalvanir");
     cy.get("#lastName").type("vieira");
     cy.get("#email").type("dalvanir@dalvanir.com");
     cy.get("#open-text-area").type(longTest, { delay: 0 });
     cy.contains("button", "Enviar").click();
     cy.get(".success").should("be.visible");
+    cy.tick(3000)
+    cy.get(".success").should("not.be.visible");
   });
 
   it("exibe mensagem de erro ao submeter o formulário com um email com  formação", function () {
