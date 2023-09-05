@@ -7,7 +7,7 @@ describe("central de Atendimento ao Cliente TAT", function () {
     cy.title().should("be.equal", "Central de Atendimento ao Cliente TAT");
   });
 
-  it.only("preencha os campos obrigatórios e envia o formulário", function () {
+  it("preencha os campos obrigatórios e envia o formulário", function () {
     const longTest =
       "teste, teste, teste, teste, teste, teste,teste, teste, teste,teste, teste, teste,teste, teste, teste";
     cy.clock();
@@ -17,7 +17,7 @@ describe("central de Atendimento ao Cliente TAT", function () {
     cy.get("#open-text-area").type(longTest, { delay: 0 });
     cy.contains("button", "Enviar").click();
     cy.get(".success").should("be.visible");
-    cy.tick(3000)
+    cy.tick(3000);
     cy.get(".success").should("not.be.visible");
   });
 
@@ -138,5 +138,22 @@ describe("central de Atendimento ao Cliente TAT", function () {
     cy.get("#privacy a").invoke("removeAttr", "target").click();
 
     cy.contains("Talking About Testing").should("be.visible");
+  });
+
+  it.only("exibe e esconde as mensagens de sucesso e erro usando o .invoke", () => {
+    cy.get(".success")
+      .should("not.be.visible")
+      .invoke("show")
+      .should("be.visible")
+      .and("contain", "Mensagem enviada com sucesso.")
+      .invoke("hide")
+      .should("not.be.visible");
+    cy.get(".error")
+      .should("not.be.visible")
+      .invoke("show")
+      .should("be.visible")
+      .and("contain", "Valide os campos obrigatórios!")
+      .invoke("hide")
+      .should("not.be.visible");
   });
 });
